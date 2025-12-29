@@ -8,21 +8,20 @@ body {
     padding: 0;
 }
 
-.monhoc-list li {
+.monhoc-item {
+    position: relative;
     margin: 10px 0;
-    padding: 12px 14px;
-    border-left: 4px solid #4caf50;
+    padding: 14px;
+    border-left: 4px solid #ccc;
     background-color: #f9f9f9;
 }
 
-/* mỗi span chiếm 1 dòng */
 .name,
 .phong,
 .time {
     display: block;
 }
 
-/* style từng dòng */
 .name {
     font-weight: bold;
     margin-bottom: 6px;
@@ -43,22 +42,203 @@ body {
     color: #2e7d32;
 }
 
-/* ô ngày thi hôm nay */
 .monhoc-item.today {
-    border-left-color: #e53935;
-    background-color: #ffecec;
+    border-left-color: #fbc02d;
+    background-color: #fff8e1;
 }
 
 .monhoc-item.today .name {
+    color: #f9a825;
+}
+
+.monhoc-item.checked {
+    border-left-color: #2e7d32;
+    background-color: #e8f5e9;
+}
+
+.monhoc-item.checked .name {
+    color: #2e7d32;
+}
+
+.monhoc-item.past {
+    border-left-color: #e53935;
+    background-color: #ffecec;
+    opacity: 0.85;
+}
+
+.monhoc-item.past .name {
     color: #e53935;
 }
 
-/* sắp thi (trước 1 ngày) */
-.monhoc-item.soon {
-    border-left-color: #fb8c00;   /* cam */
-    background-color: #fff3e0;
+.checkin-btn {
+    position: absolute;
+    right: 14px;
+    bottom: 24px;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #fbc02d, #fdd835);
+    color: #333;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    transition: all 0.2s ease;
 }
 
-.monhoc-item.soon .name {
-    color: #fb8c00;
+.checkin-btn:hover {
+    transform: scale(1.05);
+}
+
+.monhoc-item:not(.today):not(.checked) .checkin-btn {
+    display: none;
+}
+
+.checkin-btn.checked {
+    background: linear-gradient(135deg, #2e7d32, #66bb6a);
+    color: #fff;
+    cursor: default;
+}
+
+.fail-btn {
+    position: absolute;
+    right: 14px;
+    bottom: 24px;
+    padding: 15px 20px;
+    border: none;
+    border-radius: 30px;
+    background: #ef9a9a;
+    color: #b71c1c;
+    font-weight: bold;
+    cursor: not-allowed;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.15);
+}
+
+.reset-btn {
+    margin-bottom: 16px;
+    padding: 8px 22px;
+    border: none;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #e53935, #ef5350);
+    color: #fff;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+    transition: all 0.2s ease;
+}
+
+.reset-btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #d32f2f, #e57373);
+}
+
+.reset-btn:active {
+    transform: scale(0.95);
+}
+
+#login-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+#login-box {
+    width: 320px;
+    padding: 22px;
+    background: #fff;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 12px 25px rgba(0,0,0,0.35);
+    animation: popup 0.25s ease;
+}
+
+@keyframes popup {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+#login-box h3 {
+    margin-bottom: 14px;
+    color: #2e7d32;
+}
+
+#login-box input {
+    width: 90%;
+    padding: 10px 12px;
+    margin-bottom: 14px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    font-size: 15px;
+}
+
+#login-box button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 22px;
+    background: linear-gradient(135deg, #4caf50, #66bb6a);
+    color: #fff;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+#login-box button:hover {
+    transform: scale(1.05);
+}
+
+#welcome {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.logout-btn {
+    padding: 10px 22px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(135deg, #e53935, #ef5350);
+    color: #fff;
+    font-weight: bold;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.25);
+    transition: all 0.2s ease;
+    margin-left: 0px;
+}
+
+.logout-btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #d32f2f, #e57373);
+}
+
+.logout-btn:active {
+    transform: scale(0.95);
+}
+
+.mssv-badge {
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    padding: 0 8px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, #4caf50, #66bb6a);
+    color: white;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    white-space: nowrap;
+    width: auto;
+    max-width: max-content;
 }
